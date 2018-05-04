@@ -33,9 +33,9 @@ def read_mail(user, password):
         print('Subject:', decode_header(parsed_email['Subject']))
         print('=========== email #%i ended ============' % i)
 
-    back = input("Type back to go back to the menu: ")
-    while(back.lower() != "back"):
-        back = input("Type back to go back to the menu: ")
+    back = input("Press enter to go back to the menu: ")
+    while(back.find('') == -1):
+        back = input("Press enter to go back to the menu: ")
     menu()
 
 
@@ -53,9 +53,9 @@ def send_mail(user, password):
     server.sendmail(user, [TO], BODY)
     print ('email sent')
     server.quit()
-    back = input("Type back to go back to the menu: ")
-    while(back.lower() != "back"):
-        back = input("Type back to go back to the menu: ")
+    back = input("Press enter to go back to the menu: ")
+    while(back.find('') == -1):
+        back = input("Press enter to go back to the menu: ")
     menu()
 
 
