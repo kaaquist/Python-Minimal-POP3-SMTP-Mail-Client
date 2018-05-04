@@ -10,22 +10,19 @@ print("1. outlook")
 print("2. gmail")
 print("3. yahoo")
 
+popPort = 995
+smtpPort = 587
+
 chosenOption = input("Give the number of the provider you use: ")
 if(chosenOption == "1"):
     popServer = "pop-mail.outlook.com"
-    popPort = 995
     smtpServer = "smtp-mail.outlook.com"
-    smtpPort = 587
 elif(chosenOption == "2"):
     popServer = "pop.gmail.com"
-    popPort = 995
     smtpServer = "smtp.gmail.com"
-    smtpPort = 587
 else:
     popServer = "pop.mail.yahoo.com"
-    popPort = 995
     smtpServer = "smtp.mail.yahoo.com"
-    smtpPort = 587
 
 user = input("Username: ")
 password = input("Password: ")
