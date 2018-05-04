@@ -17,7 +17,7 @@ def decode_header(header):
         return decoded_bytes.decode(charset)
 
 
-def readMail(user, password):
+def read_mail(user, password):
     Mailbox = poplib.POP3_SSL('pop-mail.outlook.com', '995')
     password = (password)
     Mailbox.user(user)
@@ -39,7 +39,7 @@ def readMail(user, password):
     menu()
 
 
-def sendMail(user, password):
+def send_mail(user, password):
     TO = input("To who: ")
     SUBJECT = input("What's the subject: ")
     TEXT = input("What's the message: ")
@@ -66,9 +66,9 @@ def menu():
 
     chosenOption = input("Give the number of the option you want to do: ")
     if(chosenOption == "1"):
-        readMail(user, password)
+        read_mail(user, password)
     elif(chosenOption == "2"):
-        sendMail(user, password)
+        send_mail(user, password)
     else:
         os._exit
 menu()
