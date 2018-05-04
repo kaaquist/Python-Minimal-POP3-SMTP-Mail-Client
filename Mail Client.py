@@ -3,8 +3,6 @@ import poplib
 import email
 import os
 import smtplib
-import email.utils
-from email.mime.text import MIMEText
 print("Welcome to this minimal POP3/SMTP Mail Client")
 
 user = input("Username: ")
