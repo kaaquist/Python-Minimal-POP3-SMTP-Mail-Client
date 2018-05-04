@@ -3,7 +3,29 @@ import poplib
 import email
 import os
 import smtplib
+
 print("Welcome to this minimal POP3/SMTP Mail Client")
+print("What email provider do you use?")
+print("1. outlook")
+print("2. gmail")
+print("3. yahoo")
+
+chosenOption = input("Give the number of the provider you use: ")
+if(chosenOption == "1"):
+    popServer = "pop-mail.outlook.com"
+    popPort = 995
+    smtpServer = "smtp-mail.outlook.com"
+    smtpPort = 587
+elif(chosenOption == "2"):
+    popServer = "pop.gmail.com"
+    popPort = 995
+    smtpServer = "smtp.gmail.com"
+    smtpPort = 587
+else:
+    popServer = "pop.mail.yahoo.com"
+    popPort = 995
+    smtpServer = "smtp.mail.yahoo.com"
+    smtpPort = 587
 
 user = input("Username: ")
 password = input("Password: ")
@@ -17,7 +39,7 @@ def decode_header(header):
         return decoded_bytes.decode(charset)
 
 
-def read_mail(user, password):
+def read_mail(user, password, popServer, smtpServer, smtpPort, popPort):
     Mailbox = poplib.POP3_SSL('pop-mail.outlook.com', '995')
     password = (password)
     Mailbox.user(user)
@@ -36,7 +58,7 @@ def read_mail(user, password):
     menu()
 
 
-def send_mail(user, password):
+def send_mail(user, password, popServer, smtpServer, smtpPort, popPort):
     TO = input("To who: ")
     SUBJECT = input("What's the subject: ")
     TEXT = input("What's the message: ")
@@ -62,9 +84,9 @@ def menu():
 
     chosenOption = input("Give the number of the option you want to do: ")
     if(chosenOption == "1"):
-        read_mail(user, password)
+        read_mail(user, password, popServer, popPort, smtpServer, smtpPort)
     elif(chosenOption == "2"):
-        send_mail(user, password)
+        send_mail(user, password, popServer, popPort, smtpServer, smtpPort)
     else:
         os._exit
 menu()
