@@ -32,6 +32,7 @@ def readMail(user, password):
         print('From:', parsed_email['From'])
         print('To:', parsed_email['To'])
         print('Date:', parsed_email['Date'])
+        print('Subject:', decode_header(parsed_email['Subject']))
         print('=========== email #%i ended ============' % i)
 
     back = input("Type back to go back to the menu: ")
