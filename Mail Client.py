@@ -10,19 +10,19 @@ print("1. outlook")
 print("2. gmail")
 print("3. yahoo")
 
-popPort = 995
-smtpPort = 587
+POP_PORT = 995
+SMTP_PORT = 587
 
-chosenOption = input("Give the number of the provider you use: ")
-if(chosenOption == "1"):
-    popServer = "pop-mail.outlook.com"
-    smtpServer = "smtp-mail.outlook.com"
-elif(chosenOption == "2"):
-    popServer = "pop.gmail.com"
-    smtpServer = "smtp.gmail.com"
+chosen_option = input("Give the number of the provider you use: ")
+if(chosen_option == "1"):
+    pop_server = "pop-mail.outlook.com"
+    smtp_server = "smtp-mail.outlook.com"
+elif(chosen_option == "2"):
+    pop_server = "pop.gmail.com"
+    smtp_server = "smtp.gmail.com"
 else:
-    popServer = "pop.mail.yahoo.com"
-    smtpServer = "smtp.mail.yahoo.com"
+    pop_server = "pop.mail.yahoo.com"
+    smtp_server = "smtp.mail.yahoo.com"
 
 user = input("Username: ")
 password = input("Password: ")
@@ -36,18 +36,18 @@ def decode_header(header):
         return decoded_bytes.decode(charset)
 
 
-def read_mail(user, password, popServer, smtpServer, smtpPort, popPort):
-    Mailbox = poplib.POP3_SSL('pop-mail.outlook.com', '995')
+def read_mail(user, password, pop_server, smtp_server, SMTP_PORT, POP_PORT):
+    mailbox = poplib.POP3_SSL('pop-mail.outlook.com', '995')
     password = (password)
-    Mailbox.user(user)
-    Mailbox.pass_(password)
-    numMessages = len(Mailbox.list()[1])
-    for i in range(numMessages-5, numMessages):
-        raw_email = b"\n".join(Mailbox.retr(i+1)[1])
+    mailbox.user(user)
+    mailbox.pass_(password)
+    num_messages = len(mailbox.list()[1])
+    for i in range(num_messages-5, num_messages):
+        raw_email = b"\n".join(mailbox.retr(i+1)[1])
         parsed_email = email.message_from_bytes(raw_email)
         print('=========== email #%i ============' % i)
         print('From:', parsed_email['From'])
-        print('To:', parsed_email['To'])
+        print('to:', parsed_email['to'])
         print('Date:', parsed_email['Date'])
         print('Subject:', decode_header(parsed_email['Subject']))
         print('=========== email #%i ended ============' % i)
@@ -55,18 +55,18 @@ def read_mail(user, password, popServer, smtpServer, smtpPort, popPort):
     menu()
 
 
-def send_mail(user, password, popServer, smtpServer, smtpPort, popPort):
-    TO = input("To who: ")
-    SUBJECT = input("What's the subject: ")
-    TEXT = input("What's the message: ")
+def send_mail(user, password, pop_server, smtp_server, SMTP_PORT, POP_PORT):
+    to = input("To who: ")
+    subject = input("What's the subject: ")
+    text = input("What's the message: ")
     server = smtplib.SMTP('smtp-mail.outlook.com', 587)
     server.ehlo()
     server.starttls()
     server.login(user, password)
 
-    BODY = '\r\n'.join(['To: %s' % TO, 'From: %s' % user,
-                       'Subject: %s' % SUBJECT, '', TEXT])
-    server.sendmail(user, [TO], BODY)
+    body = '\r\n'.join(['To: %s' % to, 'From: %s' % user,
+                       'Subject: %s' % subject, '', text])
+    server.sendmail(user, [to], body)
     print ('email sent')
     server.quit()
     back = input("Press enter to go back to the menu: ")
@@ -79,11 +79,11 @@ def menu():
     print("2. Send mail")
     print("3. Exit")
 
-    chosenOption = input("Give the number of the option you want to do: ")
-    if(chosenOption == "1"):
-        read_mail(user, password, popServer, popPort, smtpServer, smtpPort)
-    elif(chosenOption == "2"):
-        send_mail(user, password, popServer, popPort, smtpServer, smtpPort)
+    chosen_option = input("Give the number of the option you want to do: ")
+    if(chosen_option == "1"):
+        read_mail(user, password, pop_server, POP_PORT, smtp_server, SMTP_PORT)
+    elif(chosen_option == "2"):
+        send_mail(user, password, pop_server, POP_PORT, smtp_server, SMTP_PORT)
     else:
         os._exit
 menu()
