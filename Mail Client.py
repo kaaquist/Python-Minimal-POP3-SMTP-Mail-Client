@@ -69,7 +69,6 @@ def send_mail(user, password, pop_server, smtp_server, SMTP_PORT, POP_PORT):
     server.sendmail(user, [to], body)
     print ('email sent')
     server.quit()
-    back = input("Press enter to go back to the menu: ")
     input("Press enter to go back to menu")
     menu()
 
