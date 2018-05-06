@@ -7,8 +7,7 @@ import smtplib
 print("Welcome to this minimal POP3/SMTP Mail Client")
 print("What email provider do you use?")
 print("1. outlook")
-print("2. gmail")
-print("3. yahoo")
+print("2. yahoo")
 
 POP_PORT = 995
 SMTP_PORT = 587
@@ -17,9 +16,6 @@ chosen_option = input("Give the number of the provider you use: ")
 if(chosen_option == "1"):
     pop_server = "pop-mail.outlook.com"
     smtp_server = "smtp-mail.outlook.com"
-elif(chosen_option == "2"):
-    pop_server = "pop.gmail.com"
-    smtp_server = "smtp.gmail.com"
 else:
     pop_server = "pop.mail.yahoo.com"
     smtp_server = "smtp.mail.yahoo.com"
