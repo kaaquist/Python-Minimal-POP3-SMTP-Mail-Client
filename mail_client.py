@@ -4,24 +4,9 @@ import email
 import os
 import smtplib
 
-print("Welcome to this minimal POP3/SMTP Mail Client")
-print("What email provider do you use?")
-print("1. outlook")
-print("2. yahoo")
 
 POP_PORT = 995
 SMTP_PORT = 587
-
-chosen_option = input("Give the number of the provider you use: ")
-if(chosen_option == "1"):
-    pop_server = "pop-mail.outlook.com"
-    smtp_server = "smtp-mail.outlook.com"
-else:
-    pop_server = "pop.mail.yahoo.com"
-    smtp_server = "smtp.mail.yahoo.com"
-
-user = input("Username: ")
-password = input("Password: ")
 
 
 def decode_header(header):
@@ -63,7 +48,7 @@ def send_mail(user, password, pop_server, smtp_server, SMTP_PORT, POP_PORT):
     body = '\r\n'.join(['To: %s' % to, 'From: %s' % user,
                        'Subject: %s' % subject, '', text])
     server.sendmail(user, [to], body)
-    print ('email sent')
+    print('email sent')
     server.quit()
     input("Press enter to go back to menu")
     menu()
@@ -81,4 +66,21 @@ def menu():
         send_mail(user, password, pop_server, POP_PORT, smtp_server, SMTP_PORT)
     else:
         os._exit
-menu()
+
+
+if __name__ == '__main__':
+    print("Welcome to this minimal POP3/SMTP Mail Client")
+    print("What email provider do you use?")
+    print("1. outlook")
+    print("2. yahoo")
+    chosen_option = input("Give the number of the provider you use: ")
+    if(chosen_option == "1"):
+        pop_server = "pop-mail.outlook.com"
+        smtp_server = "smtp-mail.outlook.com"
+    else:
+        pop_server = "pop.mail.yahoo.com"
+        smtp_server = "smtp.mail.yahoo.com"
+
+    user = input("Username: ")
+    password = input("Password: ")
+    menu()
