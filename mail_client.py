@@ -4,6 +4,8 @@ import email
 import os
 import smtplib
 
+"""Hacktoberfest 5""""
+
 print("Welcome to this minimal POP3/SMTP Mail Client")
 print("What email provider do you use?")
 print("1. outlook")
